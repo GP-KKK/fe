@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:fe/src/data/model/model.dart';
 import 'package:fe/src/presentation/screen/chat/create_channel_screen.dart';
 import 'package:fe/src/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -73,13 +75,14 @@ class _ChatListState extends State<ChatListScreen> {
                 itemBuilder: (context, index) {
                   GroupChannel channel = _channels[index];
 
+
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: GestureDetector(
                       onTap: () async {
                         await Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
-                                ChatScreen(groupChannel: channel)));
+                                ChatScreen(groupChannel: channel, email: channel.data,)));
                         makeChannelList();
                       },
                       child: Stack(
@@ -130,7 +133,7 @@ class _ChatListState extends State<ChatListScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          channel.name,
+                                          '${channel.name}와의 대화',
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
                                           style: textTheme.bodyLarge!.copyWith(

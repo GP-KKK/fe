@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fe/src/app.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,8 +10,22 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sendbird_chat_sdk/sendbird_chat_sdk.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    await Firebase.initializeApp();
+    print('Firebase 초기화 성공');
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+    String? token = await _firebaseMessaging.getToken();
+    print('FCM 토큰: $token');
+
+  } catch (e) {
+    print('Firebase 초기화 실패: $e');
+  }
+
   await initializeApp();
   runApplication();
 }

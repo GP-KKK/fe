@@ -6,7 +6,7 @@ part of 'controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authControllerHash() => r'870b8809d595b0de595c7eba7a3f3329401cb599';
+String _$authControllerHash() => r'f8b3d9e5f328bfe6e42fd18b53989ce69ac68fc0';
 
 /// See also [AuthController].
 @ProviderFor(AuthController)
@@ -38,7 +38,7 @@ final errorControllerProvider =
 );
 
 typedef _$ErrorController = AutoDisposeNotifier<ErrorState>;
-String _$newsControllerHash() => r'b1f86d6650ef726a51cd8d7e0c6a4dd3f3e6db51';
+String _$newsControllerHash() => r'3d28313ad6d22ab4fd775439226d5ba6f6dd76bb';
 
 /// See also [NewsController].
 @ProviderFor(NewsController)
@@ -55,4 +55,4 @@ final newsControllerProvider =
 
 typedef _$NewsController = AutoDisposeAsyncNotifier<NewsState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

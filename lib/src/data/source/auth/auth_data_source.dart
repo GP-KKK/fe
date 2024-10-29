@@ -17,11 +17,10 @@ class AuthDataSource implements AuthRepository{
     final userInfo = await loginService?.login();
     print("네이버로 받은 정보 : $userInfo");
     if(userInfo == null){
+      print('실패!');
       throw Exception('로그인 실패');
     }else{
       final response = await _postLoginProcess(userInfo);
-      print("=======response===========");
-      print(response);
       if(response!=null){
         return response;
 
@@ -32,12 +31,11 @@ class AuthDataSource implements AuthRepository{
   Future<UserModel?> _postLoginProcess(UserModel userInfo) async {
 
     Map<String, dynamic> toLoginData ={ "email":userInfo.email, "username":userInfo.name, "source":userInfo.source};
-    print(toLoginData);
     final Dio dio = Dio();
-
+    String ip = Constants.ip;
     try {
       final response = await dio.post(
-        'http://34.47.108.136:8080/login',
+        '$ip/login',
         data: toLoginData,
       );
       print("response");
@@ -59,13 +57,14 @@ class AuthDataSource implements AuthRepository{
       print("userModel!!!!!!!");
 
       final userModel = UserModel.fromJson(responseData);
-      print(UserModel.fromJson(responseData));
 
-      print(userModel);
+      print('userModel: $userModel');
 
       return userModel;
 
     } catch (err) {
+      print(err);
+      print("error occured");
       return null;
     }
   }
@@ -74,23 +73,27 @@ class AuthDataSource implements AuthRepository{
 
   @override
   Future<void> updateUser({required UserModel user}) async {
-    final Dio dio = Dio();
-    await dio.put(
-      'http://34.47.108.136:8080/modify',
-      data: toJsonSig(user),
-    );
+    final Map<String, dynamic> jsonData = toJsonSig(user);
+    print('a_d_s ${jsonData.toString()}'); // jsonEncode로 올바른 JSON 형식 출력
 
+    final Dio dio = Dio();
+    String ip = Constants.ip;
+    await dio.put(
+      '$ip/modify',
+      data: (jsonData),
+    );
+    print('여기서 안넘어옴');
   }
   Map<String, dynamic> toJsonSig(UserModel userModel) {
     return {
-      'email': userModel.email,
-      'name': userModel.name,
-      'source': userModel.source,
-      'profileImage': userModel.profileImage,
-      'feelState': userModel.feelState.toJson(userModel.feelState),
-      'feel': userModel.feel,
-      'emotionDegree': userModel.emotionDegree?.toJson(userModel.emotionDegree!),
-      'qrcode': userModel.qrcode,
+      "email": userModel.email,
+      "name": userModel.name,
+      "source": userModel.source,
+      "profileImage": userModel.profileImage,
+      "feelState": userModel.feelState.toString().split('.').last, // "COMMING_SOON"
+      "feel": userModel.feel,
+      "emotionDegree": userModel.emotionDegree ?? 36.5,
+      "qrcode": userModel.qrcode,
     };
   }
 

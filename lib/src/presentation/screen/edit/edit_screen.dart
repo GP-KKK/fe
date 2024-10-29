@@ -10,14 +10,11 @@ import 'package:fe/src/presentation/layout/scollable_layout.dart';
 import 'package:fe/src/presentation/screen/edit/widget/feel_state_bottom_sheet.dart';
 import 'package:fe/src/presentation/screen/edit/widget/profile_image_bottom_sheet.dart';
 import 'package:fe/src/presentation/screen/edit/widget/profile_image_modify_button.dart';
-import 'package:fe/src/presentation/screen/edit/widget/school_bottom_sheet.dart';
 import 'package:fe/src/presentation/utils/form_validate_utils.dart';
-import 'package:fe/src/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class EditScreen extends ConsumerStatefulWidget {
   const EditScreen({super.key});
@@ -106,8 +103,10 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     final textTheme = Theme.of(context).textTheme;
     final account = ref.watch(authControllerProvider) as Authenticated;
     UserModel currentUser = account.user;
-    UserModel updatedUser = account.updatedUser!;
 
+    print('account.user: ${account.user}');
+    print('account.updatedUser: ${account.updatedUser}');
+    UserModel updatedUser = account.updatedUser!;
     ref.listen<AuthState>(authControllerProvider, (_, state) {
       if (state is Authenticated) {
         final UserModel updatedUser = state.updatedUser!;
@@ -131,6 +130,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     });
     String name= updatedUser.name;
     String feel= updatedUser.feel;
+    FeelState feelstate= updatedUser.feelState;
     if (account.updatedUser != null) {
       return GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -142,8 +142,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
           innerTopPadding: 0,
           bottomTabBar: BottomSubmitButton(
             onPressed: (){
-              updatedUser=updatedUser.copyWith(name: name, feel: feel);
-              if(name!=currentUser.name || feel!=currentUser.feel){
+              if(name!=currentUser.name || feel!=currentUser.feel||feelstate!=currentUser.feelState){
                 isProfileInfoChanged=true;
               }
               if(isProfileInfoChanged){
@@ -175,6 +174,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
                           name=value;
                           print(name);
                         },
+
                         focusNode: _nameFocus,
                         validator: (value) => FormValidateUtils()
                             .validateName(_nameFocus, value!),

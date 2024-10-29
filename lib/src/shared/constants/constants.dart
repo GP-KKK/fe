@@ -1,3 +1,3 @@
 class Constants {
-  static String ip ='34.47.108.136:8080';
+  static String ip ='http://34.64.108.163:8080';
 }

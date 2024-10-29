@@ -4,11 +4,6 @@ import 'package:fe/src/presentation/screen/home/home_screen.dart';
 import 'package:fe/src/presentation/screen/login/widget/social_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-// import 'package:guardiann_flutter/src/presentation/controller/controller.dart';
-// import 'package:guardiann_flutter/src/presentation/layout/static_layout.dart';
-// import 'package:guardiann_flutter/src/presentation/screen/login/widget/social_login_button_set.dart';
-// import 'package:guardiann_flutter/src/router/router.dart';
 
 class LoginScreen extends ConsumerWidget {
   final String? path;

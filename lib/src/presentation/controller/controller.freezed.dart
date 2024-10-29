@@ -84,6 +84,9 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,9 @@ class __$$AuthInitialImplCopyWithImpl<$Res>
   __$$AuthInitialImplCopyWithImpl(
       _$AuthInitialImpl _value, $Res Function(_$AuthInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -215,6 +221,9 @@ class __$$NotAuthenticatedImplCopyWithImpl<$Res>
   __$$NotAuthenticatedImplCopyWithImpl(_$NotAuthenticatedImpl _value,
       $Res Function(_$NotAuthenticatedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -336,6 +345,8 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
       _$AuthenticatedImpl _value, $Res Function(_$AuthenticatedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -354,6 +365,8 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res> get user {
@@ -362,6 +375,8 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
     });
   }
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get updatedUser {
@@ -403,7 +418,9 @@ class _$AuthenticatedImpl implements Authenticated {
   @override
   int get hashCode => Object.hash(runtimeType, user, updatedUser);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
@@ -492,7 +509,10 @@ abstract class Authenticated implements AuthState {
 
   UserModel get user;
   UserModel? get updatedUser;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -511,6 +531,9 @@ class __$$AuthInvalidImplCopyWithImpl<$Res>
   __$$AuthInvalidImplCopyWithImpl(
       _$AuthInvalidImpl _value, $Res Function(_$AuthInvalidImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -671,6 +694,9 @@ class _$ErrorStateCopyWithImpl<$Res, $Val extends ErrorState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -687,6 +713,9 @@ class __$$ErrorInitialImplCopyWithImpl<$Res>
   __$$ErrorInitialImplCopyWithImpl(
       _$ErrorInitialImpl _value, $Res Function(_$ErrorInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -793,6 +822,8 @@ class __$$ErrorNotifyImplCopyWithImpl<$Res>
       _$ErrorNotifyImpl _value, $Res Function(_$ErrorNotifyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -848,7 +879,9 @@ class _$ErrorNotifyImpl implements ErrorNotify {
   @override
   int get hashCode => Object.hash(runtimeType, code, message, exception);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorNotifyImplCopyWith<_$ErrorNotifyImpl> get copyWith =>
@@ -927,7 +960,10 @@ abstract class ErrorNotify implements ErrorState {
   int? get code;
   String get message;
   Exception? get exception;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorNotifyImplCopyWith<_$ErrorNotifyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -936,7 +972,9 @@ abstract class ErrorNotify implements ErrorState {
 mixin _$NewsState {
   List<NewsModel> get newsList => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NewsStateCopyWith<NewsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -959,6 +997,8 @@ class _$NewsStateCopyWithImpl<$Res, $Val extends NewsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -992,6 +1032,8 @@ class __$$NewsStateImplCopyWithImpl<$Res>
       _$NewsStateImpl _value, $Res Function(_$NewsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1038,7 +1080,9 @@ class _$NewsStateImpl implements _NewsState {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_newsList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsStateImplCopyWith<_$NewsStateImpl> get copyWith =>
@@ -1050,8 +1094,11 @@ abstract class _NewsState implements NewsState {
 
   @override
   List<NewsModel> get newsList;
+
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsStateImplCopyWith<_$NewsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

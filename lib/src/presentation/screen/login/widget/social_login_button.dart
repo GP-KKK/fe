@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:guardiann_flutter/src/data/repository/repository.dart';
-// import 'package:guardiann_flutter/src/presentation/controller/controller.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -76,6 +74,8 @@ class _SocialLoginButtonSetState extends ConsumerState<SocialLoginButtonSet> {
       print('id = ${result.account.id}');
       print('email = ${result.account.email}');
       print('name = ${result.account.name}');
+    }else{
+      print("개똥망");
     }
     setState(() {
       _loginPlatform = LoginPlatform.naver;

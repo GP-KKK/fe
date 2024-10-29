@@ -2,6 +2,8 @@ import 'package:fe/src/presentation/screen/chat/chat_list_screen.dart';
 import 'package:fe/src/presentation/screen/edit/edit_screen.dart';
 import 'package:fe/src/presentation/screen/login/login_screen.dart';
 import 'package:fe/src/presentation/screen/map/map_screen.dart';
+import 'package:fe/src/presentation/screen/map/newmap_screen.dart';
+import 'package:fe/src/presentation/screen/map/together_screen.dart';
 import 'package:fe/src/presentation/screen/news/news_article.dart';
 import 'package:fe/src/presentation/screen/news/news_screen.dart';
 import 'package:fe/src/presentation/screen/qr/loading_screen.dart';
@@ -32,7 +34,7 @@ class App extends HookConsumerWidget{
         '/news_list': (context) => NewsScreen(),
         '/news_article': (context) => const NewsArticle(url: ''),
         '/edit': (context) => EditScreen(),
-        '/map':(context)=>MapScreen(),
+        '/map':(context)=>TogetherScreen(),
         '/setting': (context) => SettingScreen(),
         '/qr_code': (context) => QrCodeScreen(), // qr code 찍는 화면
         '/chat_list': (context) => ChatListScreen(),

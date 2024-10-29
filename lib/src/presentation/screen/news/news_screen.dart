@@ -56,7 +56,6 @@ class _NewsScreenState extends ConsumerState<NewsScreen> {
   }
 
   Widget _buildNewsScreen(NewsState news, TextTheme textTheme) {
-    print("did in?>?");
     print(news.newsList);
     return ScrollableLayout(
       isAppBarVisible: true,

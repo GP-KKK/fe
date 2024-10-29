@@ -10,8 +10,10 @@ class NewsController extends _$NewsController {
   Future<NewsState> _fetchNewsList() async {
     print('fetch news list');
     final Dio dio = Dio();
+    String ip = Constants.ip;
+
     final response = await dio.get(
-      'http://34.47.108.136:8080/crawling',
+      '$ip/crawling',
     );
     List<dynamic> data = response.data as List<dynamic>;
 

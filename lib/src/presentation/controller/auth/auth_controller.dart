@@ -11,6 +11,8 @@ class AuthController extends _$AuthController {
     final user = await getProfile();
 
     if (user == null) {
+      print('auth_controller user to string');
+      print(user.toString());
       state = const NotAuthenticated();
     }
   }
@@ -27,7 +29,7 @@ class AuthController extends _$AuthController {
       //String? profileImage, FeelState feelState, EmotionDegree? emotionDegree
       String? profileImage = user.profileImage;
       FeelState feelState = user.feelState;
-      EmotionDegree? emotionDegree = user.emotionDegree;
+      double emotionDegree = user.emotionDegree;
       bool shouldUpdate = false;
 
       if (profileImage == null) {
@@ -41,7 +43,7 @@ class AuthController extends _$AuthController {
       }
 
       if (emotionDegree == null) {
-        emotionDegree = EmotionDegree.UNKNOWN;
+        emotionDegree = 36.5;
         shouldUpdate = true;
       }
 
@@ -77,8 +79,9 @@ class AuthController extends _$AuthController {
     Map<String, dynamic> json = {
       "email": email,
     };
+    String ip = Constants.ip;
     final response = await dio.get(
-      'http://34.47.108.136:8080/getUser',
+      '$ip/getUser',
       data: json,
     );
     final Map<String, dynamic> responseData;
@@ -104,9 +107,11 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> updateProfile({required UserModel user}) async {
+    print('auth_controller updateProfile: ${user.toString()}');
     try {
 
       await ref.watch(authRepositoryProvider).updateUser(user: user);
+
       setProfile(user: user, updatedUser: user);
     } catch (error, stackTrace) {
       ref.read(errorControllerProvider.notifier).onError(error, stackTrace);

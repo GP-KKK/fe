@@ -6,14 +6,18 @@
     <!-- 백그라운드 상태에서의 위치 권한 ( 앱을 사용하지 않을 때 ) -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
 
     <application
+
         android:label="fe"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <!-- google map -->
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCrbW0UQw86EwJ5xR9AvMtx4WFUcxEJEO0"/>
+            android:value="AIzaSyDJF5O0KyEi9ALYx_q2BC4cB9GpJOrUlKY"/>
         <!-- 네이버 로그인 관련 -->
         <meta-data
             android:name="com.naver.sdk.clientId"
@@ -63,6 +67,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility?hl=en and

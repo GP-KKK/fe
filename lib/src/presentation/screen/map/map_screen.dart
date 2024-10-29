@@ -40,25 +40,31 @@ class _MapScreenState extends State<MapScreen> {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+      // 서비스가 꺼져 있으면 메시지 표시
+      return Future.error('위치 서비스가 꺼져 있습니다.');
     }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        return Future.error('위치 권한이 거부되었습니다.');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error('위치 권한이 영구적으로 거부되었습니다.');
     }
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    return LatLng(position.latitude, position.longitude);
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      return LatLng(position.latitude, position.longitude);
+    } catch (e) {
+      print('위치 정보를 가져오지 못했습니다: $e');
+      return LatLng(0.0, 0.0); // 기본 위치 설정
+    }
   }
 
   // 마커 생성 함수
@@ -110,13 +116,10 @@ class _MapScreenState extends State<MapScreen> {
         future: _futurePosition,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            print('check1');
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            print('check2');
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
-            print('check3');
             return Stack(
               children: [
                 GoogleMap(

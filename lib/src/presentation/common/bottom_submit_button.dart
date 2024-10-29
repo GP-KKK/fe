@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fe/src/presentation/common/custom_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class BottomSubmitButton extends ConsumerWidget {
   final String? buttonTitle;

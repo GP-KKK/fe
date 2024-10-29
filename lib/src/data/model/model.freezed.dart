@@ -22,8 +22,12 @@ NewsList _$NewsListFromJson(Map<String, dynamic> json) {
 mixin _$NewsList {
   List<NewsModel> get data => throw _privateConstructorUsedError;
 
+  /// Serializes this NewsList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NewsList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NewsListCopyWith<NewsList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,6 +50,8 @@ class _$NewsListCopyWithImpl<$Res, $Val extends NewsList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NewsList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,6 +85,8 @@ class __$$NewsListImplCopyWithImpl<$Res>
       _$NewsListImpl _value, $Res Function(_$NewsListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,12 +130,14 @@ class _$NewsListImpl implements _NewsList {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsListImplCopyWith<_$NewsListImpl> get copyWith =>
@@ -150,8 +160,11 @@ abstract class _NewsList implements NewsList {
 
   @override
   List<NewsModel> get data;
+
+  /// Create a copy of NewsList
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsListImplCopyWith<_$NewsListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -165,8 +178,12 @@ mixin _$NewsModel {
   String get title => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
 
+  /// Serializes this NewsModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NewsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NewsModelCopyWith<NewsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -189,6 +206,8 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NewsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -227,6 +246,8 @@ class __$$NewsModelImplCopyWithImpl<$Res>
       _$NewsModelImpl _value, $Res Function(_$NewsModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -273,11 +294,13 @@ class _$NewsModelImpl implements _NewsModel {
             (identical(other.url, url) || other.url == url));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, title, url);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsModelImplCopyWith<_$NewsModelImpl> get copyWith =>
@@ -303,8 +326,11 @@ abstract class _NewsModel implements NewsModel {
   String get title;
   @override
   String get url;
+
+  /// Create a copy of NewsModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsModelImplCopyWith<_$NewsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -372,6 +398,9 @@ class _$UserBaseCopyWithImpl<$Res, $Val extends UserBase>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -393,6 +422,8 @@ class __$$UserBaseUserImplCopyWithImpl<$Res>
       _$UserBaseUserImpl _value, $Res Function(_$UserBaseUserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -406,6 +437,8 @@ class __$$UserBaseUserImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res> get user {
@@ -439,7 +472,9 @@ class _$UserBaseUserImpl implements _UserBaseUser {
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserBaseUserImplCopyWith<_$UserBaseUserImpl> get copyWith =>
@@ -518,7 +553,10 @@ abstract class _UserBaseUser implements UserBase {
   factory _UserBaseUser(final UserModel user) = _$UserBaseUserImpl;
 
   UserModel get user;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserBaseUserImplCopyWith<_$UserBaseUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -540,6 +578,8 @@ class __$$UserErrorImplCopyWithImpl<$Res>
       _$UserErrorImpl _value, $Res Function(_$UserErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -578,7 +618,9 @@ class _$UserErrorImpl implements UserError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserErrorImplCopyWith<_$UserErrorImpl> get copyWith =>
@@ -657,7 +699,10 @@ abstract class UserError implements UserBase {
   const factory UserError(final String message) = _$UserErrorImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserErrorImplCopyWith<_$UserErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -676,6 +721,9 @@ class __$$UserLoadingImplCopyWithImpl<$Res>
   __$$UserLoadingImplCopyWithImpl(
       _$UserLoadingImpl _value, $Res Function(_$UserLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserBase
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -770,21 +818,28 @@ abstract class UserLoading implements UserBase {
   const factory UserLoading() = _$UserLoadingImpl;
 }
 
+UserModel _$UserModelFromJson(Map<String, dynamic> json) {
+  return _UserModel.fromJson(json);
+}
+
 /// @nodoc
 mixin _$UserModel {
   String get email => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get source => throw _privateConstructorUsedError; // sns 정보 기반
-  @JsonKey(includeIfNull: false)
-  String? get profileImage => throw _privateConstructorUsedError;
+  String? get source => throw _privateConstructorUsedError;
+  String? get profileImage => throw _privateConstructorUsedError; // 정확한 매핑
+  @JsonKey(fromJson: FeelStateExtension.fromJson)
   FeelState get feelState => throw _privateConstructorUsedError;
   String get feel => throw _privateConstructorUsedError;
-  @JsonKey(includeIfNull: false)
-  EmotionDegree? get emotionDegree => throw _privateConstructorUsedError;
-  @JsonKey(includeIfNull: false)
+  double get emotionDegree => throw _privateConstructorUsedError;
   String? get qrcode => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Serializes this UserModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserModelCopyWith<UserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -798,11 +853,11 @@ abstract class $UserModelCopyWith<$Res> {
       {String email,
       String name,
       String? source,
-      @JsonKey(includeIfNull: false) String? profileImage,
-      FeelState feelState,
+      String? profileImage,
+      @JsonKey(fromJson: FeelStateExtension.fromJson) FeelState feelState,
       String feel,
-      @JsonKey(includeIfNull: false) EmotionDegree? emotionDegree,
-      @JsonKey(includeIfNull: false) String? qrcode});
+      double emotionDegree,
+      String? qrcode});
 }
 
 /// @nodoc
@@ -815,6 +870,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -824,7 +881,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? profileImage = freezed,
     Object? feelState = null,
     Object? feel = null,
-    Object? emotionDegree = freezed,
+    Object? emotionDegree = null,
     Object? qrcode = freezed,
   }) {
     return _then(_value.copyWith(
@@ -852,10 +909,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.feel
           : feel // ignore: cast_nullable_to_non_nullable
               as String,
-      emotionDegree: freezed == emotionDegree
+      emotionDegree: null == emotionDegree
           ? _value.emotionDegree
           : emotionDegree // ignore: cast_nullable_to_non_nullable
-              as EmotionDegree?,
+              as double,
       qrcode: freezed == qrcode
           ? _value.qrcode
           : qrcode // ignore: cast_nullable_to_non_nullable
@@ -876,11 +933,11 @@ abstract class _$$UserModelImplCopyWith<$Res>
       {String email,
       String name,
       String? source,
-      @JsonKey(includeIfNull: false) String? profileImage,
-      FeelState feelState,
+      String? profileImage,
+      @JsonKey(fromJson: FeelStateExtension.fromJson) FeelState feelState,
       String feel,
-      @JsonKey(includeIfNull: false) EmotionDegree? emotionDegree,
-      @JsonKey(includeIfNull: false) String? qrcode});
+      double emotionDegree,
+      String? qrcode});
 }
 
 /// @nodoc
@@ -891,6 +948,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
       _$UserModelImpl _value, $Res Function(_$UserModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -900,7 +959,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? profileImage = freezed,
     Object? feelState = null,
     Object? feel = null,
-    Object? emotionDegree = freezed,
+    Object? emotionDegree = null,
     Object? qrcode = freezed,
   }) {
     return _then(_$UserModelImpl(
@@ -928,10 +987,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.feel
           : feel // ignore: cast_nullable_to_non_nullable
               as String,
-      emotionDegree: freezed == emotionDegree
+      emotionDegree: null == emotionDegree
           ? _value.emotionDegree
           : emotionDegree // ignore: cast_nullable_to_non_nullable
-              as EmotionDegree?,
+              as double,
       qrcode: freezed == qrcode
           ? _value.qrcode
           : qrcode // ignore: cast_nullable_to_non_nullable
@@ -941,17 +1000,21 @@ class __$$UserModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$UserModelImpl implements _UserModel {
-  _$UserModelImpl(
+  const _$UserModelImpl(
       {required this.email,
       required this.name,
       this.source,
-      @JsonKey(includeIfNull: false) this.profileImage,
+      this.profileImage,
+      @JsonKey(fromJson: FeelStateExtension.fromJson)
       this.feelState = FeelState.UNKNOWN,
       this.feel = '',
-      @JsonKey(includeIfNull: false) this.emotionDegree,
-      @JsonKey(includeIfNull: false) this.qrcode});
+      this.emotionDegree = 36.5,
+      this.qrcode});
+
+  factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserModelImplFromJson(json);
 
   @override
   final String email;
@@ -959,21 +1022,19 @@ class _$UserModelImpl implements _UserModel {
   final String name;
   @override
   final String? source;
-// sns 정보 기반
   @override
-  @JsonKey(includeIfNull: false)
   final String? profileImage;
+// 정확한 매핑
   @override
-  @JsonKey()
+  @JsonKey(fromJson: FeelStateExtension.fromJson)
   final FeelState feelState;
   @override
   @JsonKey()
   final String feel;
   @override
-  @JsonKey(includeIfNull: false)
-  final EmotionDegree? emotionDegree;
+  @JsonKey()
+  final double emotionDegree;
   @override
-  @JsonKey(includeIfNull: false)
   final String? qrcode;
 
   @override
@@ -999,33 +1060,40 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.qrcode, qrcode) || other.qrcode == qrcode));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, email, name, source,
       profileImage, feelState, feel, emotionDegree, qrcode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
       __$$UserModelImplCopyWithImpl<_$UserModelImpl>(this, _$identity);
 
   @override
-  Map<String, dynamic> toJsonSig(UserModel userModel) {
-    // TODO: implement toJsonSig
-    throw UnimplementedError();
+  Map<String, dynamic> toJson() {
+    return _$$UserModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserModel implements UserModel {
-  factory _UserModel(
+  const factory _UserModel(
       {required final String email,
       required final String name,
       final String? source,
-      @JsonKey(includeIfNull: false) final String? profileImage,
-      final FeelState feelState,
+      final String? profileImage,
+      @JsonKey(fromJson: FeelStateExtension.fromJson) final FeelState feelState,
       final String feel,
-      @JsonKey(includeIfNull: false) final EmotionDegree? emotionDegree,
-      @JsonKey(includeIfNull: false) final String? qrcode}) = _$UserModelImpl;
+      final double emotionDegree,
+      final String? qrcode}) = _$UserModelImpl;
+
+  factory _UserModel.fromJson(Map<String, dynamic> json) =
+      _$UserModelImpl.fromJson;
 
   @override
   String get email;
@@ -1033,21 +1101,22 @@ abstract class _UserModel implements UserModel {
   String get name;
   @override
   String? get source;
-  @override // sns 정보 기반
-  @JsonKey(includeIfNull: false)
-  String? get profileImage;
   @override
+  String? get profileImage; // 정확한 매핑
+  @override
+  @JsonKey(fromJson: FeelStateExtension.fromJson)
   FeelState get feelState;
   @override
   String get feel;
   @override
-  @JsonKey(includeIfNull: false)
-  EmotionDegree? get emotionDegree;
+  double get emotionDegree;
   @override
-  @JsonKey(includeIfNull: false)
   String? get qrcode;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

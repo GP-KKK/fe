@@ -68,7 +68,7 @@ class CustomInterceptor extends Interceptor {
     // user-agent 설정
     final info = await PackageInfo.fromPlatform();
     options.headers['user-agent'] =
-    'guardiann_${Platform.isIOS ? 'ios' : 'android'}/${info.version}';
+    '${Platform.isIOS ? 'ios' : 'android'}/${info.version}';
 
     return super.onRequest(options, handler);
   }

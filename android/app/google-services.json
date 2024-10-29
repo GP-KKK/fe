@@ -1,1 +1,30 @@
-{"installed":{"client_id":"289836055589-btagsgngff4b9ji24erghjujnqfe2b9v.apps.googleusercontent.com","project_id":"safecarsystem","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"}}
+{
+  "project_info": {
+    "project_number": "562229120947",
+    "firebase_url": "https://carproj-6daa9-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "carproj-6daa9",
+    "storage_bucket": "carproj-6daa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562229120947:android:abba1cdb9a77a0dc5145c6",
+        "android_client_info": {
+          "package_name": "com.example.fe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn16LCTizqFA-Gr7xfeZRCmN89PRX8BMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

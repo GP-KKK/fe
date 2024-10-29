@@ -13,24 +13,12 @@ enum FeelState {
   @JsonValue('UNKNOWN') // 여기서 UNKNOWN과 매핑
   UNKNOWN,
 }
-enum EmotionDegree {
-  @JsonValue('VERYGOOD')
-  VERYGOOD,
-  @JsonValue('GOOD')
-  GOOD,
-  @JsonValue('NORMAL')
-  NORMAL,
-  @JsonValue('BAD')
-  BAD,
-  @JsonValue('VERYBAD')
-  VERYBAD,
-  @JsonValue('UNKNOWN')
-  UNKNOWN,
-}
 extension FeelStateExtension on FeelState {
   static FeelState fromJson(String? json) {
-    if (json == null) return FeelState.UNKNOWN;
-    switch (json) {
+    if (json == null) return FeelState.UNKNOWN; // null 처리 추가
+    final state = json.replaceFirst('FeelState.', '');
+
+    switch (state) {
       case 'DRIVING':
         return FeelState.DRIVING;
       case 'PARKING':
@@ -44,35 +32,9 @@ extension FeelStateExtension on FeelState {
     }
   }
 
-  String toJson(FeelState feelState) {
-    return feelState.toString().split('.').last;
-  }
-
+  String toJson() => toString().split('.').last;
 }
 
-extension EmotionDegreeExtension on EmotionDegree {
-  static EmotionDegree fromJson(String? json) {
-    if (json == null) return EmotionDegree.UNKNOWN;
-    switch (json) {
-      case 'veryGood':
-        return EmotionDegree.VERYGOOD;
-      case 'good':
-        return EmotionDegree.GOOD;
-      case 'normal':
-        return EmotionDegree.NORMAL;
-      case 'bad':
-        return EmotionDegree.BAD;
-      case 'veryBad':
-        return EmotionDegree.VERYBAD;
-      default:
-        return EmotionDegree.UNKNOWN;
-    }
-  }
-  String toJson(EmotionDegree emotionDegree) {
-    return emotionDegree.toString().split('.').last;
-  }
-
-}
 
 
 @freezed
@@ -84,28 +46,19 @@ abstract class UserBase with _$UserBase {
 
 @freezed
 class UserModel with _$UserModel {
-  factory UserModel({
+  const factory UserModel({
     required String email,
     required String name,
-    String? source, // sns 정보 기반
-    @JsonKey(includeIfNull: false) String? profileImage,
-    @Default(FeelState.UNKNOWN) FeelState feelState,
+    String? source,
+    String? profileImage, // 정확한 매핑
+    @Default(FeelState.UNKNOWN)
+    @JsonKey(fromJson: FeelStateExtension.fromJson)
+    FeelState feelState,
     @Default('') String feel,
-    @JsonKey(includeIfNull: false) EmotionDegree? emotionDegree,
-    @JsonKey(includeIfNull: false) String? qrcode,
+    @Default(36.5) double emotionDegree,
+    String? qrcode,
   }) = _UserModel;
- // {email: ksm-1219@naver.com, name: 김성민, source: naver, feel: , feelState: UNKNOWN, profileImage: null, emotionDegree: null, qrcode:
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      email: json['email'] as String,
-      name: json['name'] as String,
-      source: json['source'] as String?,
-      profileImage: json['profileImage'] as String?,
-      feelState: FeelStateExtension.fromJson(json['feelState'] as String?),
-      feel: json['feel'] as String? ?? '',
-      emotionDegree: EmotionDegreeExtension.fromJson(json['emotionDegree'] as String?),
-      qrcode: json['qrcode'] as String?,
-    );
-  }
 
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 }

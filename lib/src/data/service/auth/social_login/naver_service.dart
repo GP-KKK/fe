@@ -8,10 +8,14 @@ class NaverService implements SocialLoginRepository {
     try {
       final NaverLoginResult result = await FlutterNaverLogin.logIn();
       if (result.status == NaverLoginStatus.loggedIn) {
+        print('로그인 성공: ${result.account?.email}');
         return _toUser(result.account);
+      }else {
+        print('로그인 실패 또는 취소됨');
       }
-    } catch (error) {
-      print(error);
+
+    } catch (e) {
+      print('네이버 로그인 중 오류 발생: $e');
     }
     return null;
   }

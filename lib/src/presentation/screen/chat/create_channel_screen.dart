@@ -1,4 +1,9 @@
-import 'package:fe/src/presentation/common/animated_visibility.dart';
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:fe/src/shared/constants/constants.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:fe/src/data/model/model.dart';
 import 'package:fe/src/shared/theme/color_theme.dart';
 import 'package:fe/src/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:sendbird_chat_sdk/sendbird_chat_sdk.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final ValueNotifier<List<BaseMessage>> globalMessage =
     ValueNotifier<List<BaseMessage>>([]);
@@ -45,8 +51,10 @@ class MessageGroupChannelHandler extends GroupChannelHandler {
 
 class ChatScreen extends StatefulWidget {
   GroupChannel groupChannel;
+  UserModel? otherUser;
 
-  ChatScreen({super.key, required this.groupChannel});
+  String? email;
+  ChatScreen({super.key, required this.groupChannel, this.otherUser, this.email});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -70,29 +78,16 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  void callOnTap() {
-    setState(() {
-      print('보류');
-    });
+
+  Future<void> checkOnTap(UserModel usermodel) async {
+    //초기화
+    var email= usermodel.email;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('evaluation_$email');
+
   }
 
-  void cameraOnTap() {
-    setState(() {
-      print('보류');
-    });
-  }
-
-  void checkOnTap() {
-    setState(() {
-      // 수정
-      // admin message로 전환하려고 했는데 클라이언트 앱에서는 어드민 메시지 보낼 권한이 없음.
-      //globalMessage.value.add("상대방이 문제해결 여부를 체크할 때까지 대기중입니다...(1/2)");
-      //globalMessage.value.add("문제가 해결되었습니다...(2/2)\n매너 온도 평가 화면으로 이동합니다.");
-      _toggleMannerTemperature();
-    });
-  }
-
-  // load previous message
+  // 이전 메세지 가져오기
   Future<void> makeMessageList() async {
     try {
       final query = PreviousMessageListQuery(
@@ -111,7 +106,7 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {});
   }
 
-  // send message
+  // 메세지 보내기 함수
   Future<void> _sendMessage() async {
     String text = _textController.text;
     if (text.trim().isNotEmpty) {
@@ -146,7 +141,55 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     SendbirdChat.addChannelHandler(
         'group chatting message handler', MessageGroupChannelHandler());
+    if (widget.otherUser != null) {
+      // If UserModel is already provided, use it
+    } else if (widget.email != null) {
+      // If only email is provided, fetch the user information
+      print('widget.email: ${widget.email.toString()}');
+      fetchUserFromEmail(widget.email!);
+    }
+
     makeMessageList();
+  }
+
+  //이메일로 유저 가져오기
+  Future<void> fetchUserFromEmail(String email) async {
+    try {
+      UserModel? user = await getUser(email);
+      if (user != null) {
+        setState(() {
+          widget.otherUser = user; // Set the user data if found
+        });
+      }
+    } catch (e) {
+      print('Error fetching user: $e');
+    }
+  }
+
+  //getuser 서버 연동
+  Future<UserModel?> getUser(String email) async {
+    String ip = Constants.ip;
+    Map<String, dynamic> json = {
+      "email": email,
+    };
+    final Dio dio = Dio();
+
+    print('create_channel email: $email');
+    try {
+      final response = await dio.get(
+        '$ip/getUser',
+        data: json,
+      );
+
+      if (response.statusCode == 200) {
+        return UserModel.fromJson(response.data);
+      } else {
+        throw Exception('Failed to fetch user');
+      }
+    } catch (e) {
+      print('Error fetching user: $e');
+      return null;
+    }
   }
 
   @override
@@ -308,10 +351,17 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildCircleButton(Icons.phone, Colors.green, callOnTap),
-                    _buildCircleButton(
-                        Icons.camera, Colors.purple, cameraOnTap),
-                    _buildCircleButton(Icons.check, Colors.blue, checkOnTap),
+                    // _buildCircleButton(Icons.phone, Colors.green, callOnTap),
+                    // _buildCircleButton(
+                    //     Icons.camera, Colors.purple, cameraOnTap),
+                    _buildCircleButton(  Icons.check,
+                      Colors.blue,
+                          () async {
+                        await checkOnTap(widget.otherUser!);
+                      },
+                    ),
+                    _buildEvaluationButton(context,widget.otherUser!),
+                    _buildTogetherButton(context,widget.otherUser! )
                   ],
                 ),
               ),
@@ -393,3 +443,136 @@ Widget _buildCircleButton(
     ),
   );
 }
+
+Widget _buildTogetherButton(BuildContext context, UserModel userModel) {
+  return ElevatedButton(
+    onPressed: () async {
+      //bool alreadyEvaluated = await _isEvaluationCompleted(userModel.email);
+      // if (alreadyEvaluated) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(content: Text('이미 이 사용자를 평가하셨습니다.',style: TextStyle(color: Colors.black87))),
+      //   );
+      // } else {
+      _showCompanionConfirmDialog(context, userModel.email);
+      //}
+    },
+    child: const Text('동행 확인하기'),
+  );
+}
+void _showCompanionConfirmDialog(BuildContext context, String email) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('동행 확인'),
+        content: const Text('함께 동행했음을 확인하시겠습니까?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context), // "아니요" 선택 시 다이얼로그 닫기
+            child: const Text('아니요'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _sendEvaluation(context, email, 1, 4); // 네 선택 시 4점 평가
+              Navigator.pop(context); // 다이얼로그 닫기
+            },
+            child: const Text('네'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Widget _buildEvaluationButton(BuildContext context, UserModel userModel) {
+  return ElevatedButton(
+    onPressed: () async {
+      _showEvaluationDialog(context, userModel.email);
+
+      // bool alreadyEvaluated = await _isEvaluationCompleted(userModel.email);
+      // if (alreadyEvaluated) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(content: Text('이미 이 사용자를 평가하셨습니다.',style: TextStyle(color: Colors.black87))),
+      //   );
+      // } else {
+      // }
+    },
+    child: const Text('매너 온도 평가하기'),
+  );
+}
+
+void _showEvaluationDialog(BuildContext context, String name) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('매너 온도 평가'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildEvaluationOption(context, '매우 불친절해요', 1, name, 1),
+            _buildEvaluationOption(context, '불친절해요', 2, name, 1),
+            _buildEvaluationOption(context, '보통이에요', 3, name, 1),
+            _buildEvaluationOption(context, '친절해요', 4, name, 1),
+            _buildEvaluationOption(context, '매우 친절해요', 5, name, 1),
+          ],
+        ),
+      );
+    },
+  );
+}
+// 평가 완료 여부 저장
+Future<void> _setEvaluationCompleted(String email) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('evaluated_$email', true); // email로 구분하여 저장
+}
+
+// 평가 완료 여부 확인
+Future<bool> _isEvaluationCompleted(String email) async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getBool('evaluated_$email') ?? false; // 없을 경우 false 반환
+}
+
+Widget _buildEvaluationOption(BuildContext context, String text, int score, String email, int id) {
+  return ListTile(
+    title: Text(text,style: TextStyle(color: Colors.black87) ,),
+    onTap: () {
+      _sendEvaluation(context, email, id, score);
+    },
+  );
+}
+
+Future<void> _sendEvaluation(BuildContext context, String email, int id, int score) async {
+  String ip = Constants.ip;
+
+  final Uri url = Uri.parse('$ip/evaluate'); // 서버 URL
+  final Map<String, dynamic> requestData = {
+    'id': id,
+    'email': email,
+    'score': score,
+  };
+
+  try {
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(requestData),
+    );
+
+    if (response.statusCode == 200) {
+      await _setEvaluationCompleted(email); // 평가 완료 상태 저장
+      Navigator.of(context).pop(); // 팝업 닫기
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('평가가 성공적으로 완료되었습니다.', style: TextStyle(color: Colors.black87),)),
+      );
+    } else {
+      throw Exception('평가 실패');
+    }
+  } catch (e) {
+    Navigator.of(context).pop(); // 팝업 닫기
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('평가에 실패했습니다. 다시 시도해주세요.',style: TextStyle(color: Colors.black87))),
+    );
+  }
+}
+

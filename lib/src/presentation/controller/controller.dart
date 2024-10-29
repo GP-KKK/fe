@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:fe/src/data/model/model.dart';
 import 'package:fe/src/data/source/source.dart';
+import 'package:fe/src/shared/constants/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
